@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="theme-color" content="#1E3556" />
+  <meta name="description" content="Surya Inspirasi Schools — Semua link penting di satu tempat." />
+
+  <meta property="og:title" content="Surya Inspirasi Schools | Link Hub" />
+  <meta property="og:description" content="Akses cepat: Stock Keperluan Sekolah, Form Peminjaman iPad, dan Manajemen Buku Sekolah." />
+  <meta property="og:image" content="assets/logo-sis.png" />
+  <meta property="og:url" content="https://domain-kamu.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <title>Surya Inspirasi Schools | Link Hub</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css" />
+
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+
+<body>
+  <div class="bg-decor" aria-hidden="true">
+    <span class="bg-orb bg-orb--magenta"></span>
+    <span class="bg-orb bg-orb--orange"></span>
+    <span class="bg-grid"></span>
+  </div>
+
+  <main class="page" role="main">
+    <section class="phone-frame" aria-label="Surya Inspirasi Schools Link Hub">
+
+      <div class="topbar reveal delay-1" role="navigation" aria-label="Aksi cepat">
+        <button class="topbar-btn" id="copyLinkBtn" type="button" aria-label="Salin link halaman">
+          <i class="fa-regular fa-copy"></i>
+        </button>
+        <a class="topbar-btn" href="#links" aria-label="Lihat menu">
+          <i class="fa-solid fa-link"></i>
+        </a>
+      </div>
+
+      <header class="brand" aria-label="Header">
+        <div class="orbit reveal delay-1" aria-hidden="true">
+          <span class="orb-ring"></span>
+          <span class="orb-dot d1"></span>
+          <span class="orb-dot d2"></span>
+          <span class="orb-dot d3"></span>
+
+          <div class="avatar-wrapper">
+            <div class="avatar-bg">
+              <img src="assets/Vertikal SISK Background Putih.png" alt="Logo Surya Inspirasi Schools" />
+            </div>
+          </div>
+        </div>
+
+        <h1 class="username reveal delay-2">Surya Inspirasi Schools</h1>
+        <p class="tagline reveal delay-3">Akses cepat untuk kebutuhan sekolah</p>
+
+        <div class="badges reveal delay-3" aria-label="Info singkat">
+          <span class="badge-pill">
+            <span class="badge-dot"></span>
+            Link Hub
+          </span>
+          <span class="badge-pill badge-pill--outline">
+            <i class="fa-solid fa-shield-halved"></i>
+            Official
+          </span>
+        </div>
+
+        <nav class="social-icons reveal delay-4" aria-label="Media sosial">
+          <a href="https://inspirasischools.org/" target="_blank" rel="noopener noreferrer" aria-label="Website">
+            <i class="fas fa-globe"></i>
+          </a>
+          <a href="https://www.instagram.com/surya_inspirasischools?igsh=MXBhdmpnNWNrNGd2ZQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://wa.me/6281234049926" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </nav>
+      </header>
+
+      <div class="section-head reveal delay-2" aria-label="Judul menu">
+        <h2 class="section-title">Menu Utama</h2>
+        <p class="section-subtitle">Pilih layanan yang kamu butuhkan</p>
+      </div>
+
+      <div class="links reveal delay-3" id="links" aria-label="Daftar tautan"></div>
+
+      <div class="helper reveal delay-4" aria-label="Catatan">
+        <i class="fa-regular fa-lightbulb"></i>
+        <p>Beberapa menu masih <em>Coming Soon</em>. Nantinya akan aktif otomatis saat sistem sudah siap.</p>
+      </div>
+
+      <footer class="footer reveal delay-4" aria-label="Footer">
+        <p>
+          &copy; <span id="year"></span>
+          <strong>Surya Inspirasi Schools</strong>.
+          <span class="footer-muted">All rights reserved.</span>
+        </p>
+      </footer>
+
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">
+    <i class="fa-solid fa-check"></i>
+    <span id="toastText">Link tersalin.</span>
+  </div>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-top">
+        <h3 id="modalTitle">Coming Soon</h3>
+        <button class="modal-close" id="modalClose" aria-label="Tutup">&times;</button>
+      </div>
+      <p class="modal-desc" id="modalDesc">Fitur ini sedang disiapkan. Silakan coba lagi nanti.</p>
+      <button class="modal-ok" id="modalOk">Oke</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
