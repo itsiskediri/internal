@@ -1,12 +1,14 @@
 /* =========================
    Surya Inspirasi Schools
-   Link Hub — Modern UI
+   Link Hub — Modern UI (Premium)
    ========================= */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { height: 100%; }
 a { color: inherit; }
 button { font: inherit; }
+button { border: 0; background: none; }
+:focus-visible { outline: none; }
 
 :root{
   --navy: #1E3556;
@@ -26,8 +28,13 @@ button { font: inherit; }
 
   --ring: 0 0 0 4px rgba(245,166,35,.22);
 
-  /* 1 warna background logo (ubah kalau mau) */
+  /* 1 warna background logo */
   --logo-bg: #ffffff;
+
+  /* extra tokens */
+  --glass-top: rgba(20,38,65,.78);
+  --glass-bot: rgba(10,18,33,.62);
+  --sparkle: rgba(255,255,255,.18);
 }
 
 body{
@@ -61,6 +68,11 @@ body{
   border-radius: 999px;
   filter: blur(32px);
   opacity: .55;
+  animation: floatBg 18s ease-in-out infinite alternate;
+}
+@keyframes floatBg{
+  from { transform: translateY(0) translateX(0); }
+  to   { transform: translateY(30px) translateX(20px); }
 }
 .bg-orb--magenta{
   left: -200px; top: -220px;
@@ -79,22 +91,58 @@ body{
   mask-image: radial-gradient(ellipse at 50% 22%, black 25%, transparent 65%);
   opacity: .28;
 }
-
-/* Responsive page container */
-.page{
-  width: min(92vw, 430px);
+.bg-sparkles{
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(2px 2px at 12% 18%, rgba(255,255,255,.25), transparent 60%),
+    radial-gradient(2px 2px at 78% 26%, rgba(255,255,255,.18), transparent 60%),
+    radial-gradient(2px 2px at 36% 62%, rgba(255,255,255,.16), transparent 60%),
+    radial-gradient(2px 2px at 62% 78%, rgba(255,255,255,.14), transparent 60%),
+    radial-gradient(2px 2px at 88% 70%, rgba(255,255,255,.12), transparent 60%);
+  opacity: .45;
+  animation: twinkle 6s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{ opacity: .25; transform: translateY(0); }
+  50%{ opacity: .55; transform: translateY(6px); }
 }
 
+/* Responsive page container */
+.page{ width: min(92vw, 430px); }
+
+/* Card */
 .phone-frame{
-  background: linear-gradient(180deg, rgba(20,38,65,.86), rgba(10,18,33,.72));
+  background: linear-gradient(180deg, var(--glass-top), var(--glass-bot));
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: clamp(18px, 3.6vw, 26px) clamp(14px, 3.2vw, 18px) 18px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45),
+    0 4px 12px rgba(0,0,0,.25);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
   position: relative;
   overflow: hidden;
+}
+
+/* Gradient border highlight (premium) */
+.phone-frame::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius: var(--radius-xl);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(177,43,102,.75), rgba(245,166,35,.70));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events:none;
+  opacity: .35;
 }
 
 /* Inner glow */
@@ -109,9 +157,8 @@ body{
   pointer-events:none;
 }
 
-/* Shine sweep */
-.phone-frame::after{
-  content:"";
+/* Shine sweep (moving light) */
+.phone-frame .shine{
   position:absolute;
   top:-120px; left:-60%;
   width: 70%;
@@ -129,6 +176,8 @@ body{
   45%  { left:120%; opacity: 0; }
   100% { left:120%; opacity: 0; }
 }
+/* If you didn’t add .shine div in HTML, fallback to old ::after sweep */
+.phone-frame:not(:has(.shine))::marker { content: ""; }
 
 /* Topbar */
 .topbar{
@@ -137,7 +186,7 @@ body{
   gap: 10px;
   position: relative;
   z-index: 2;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .topbar-btn{
   width: 42px; height: 42px;
@@ -155,7 +204,7 @@ body{
   background: rgba(255,255,255,.12);
   box-shadow: var(--shadow2);
 }
-.topbar-btn:focus-visible{ outline: none; box-shadow: var(--shadow2), var(--ring); }
+.topbar-btn:focus-visible{ box-shadow: var(--shadow2), var(--ring); }
 
 /* Brand */
 .brand{ position: relative; z-index: 2; text-align: center; }
@@ -192,21 +241,16 @@ body{
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Avatar */
+/* Avatar (solid background) */
 .avatar-bg{
   width: 112px;
   height: 112px;
   padding: 10px;
   border-radius: 999px;
-
-  /* ✅ background 1 warna saja */
   background: var(--logo-bg);
-
   box-shadow: 0 14px 35px rgba(0,0,0,.28);
   position: relative;
   animation: floaty 4.8s ease-in-out infinite;
-
-  /* Optional: ring tipis brand */
   border: 3px solid rgba(245,166,35,.45);
 }
 @keyframes floaty { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
@@ -221,9 +265,9 @@ body{
 
 /* Username & Tagline */
 .username{
-  font-size: clamp(18px, 2.1vw, 20px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(18px, 2.2vw, 21px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
   margin-top: 4px;
 }
 .tagline{
@@ -251,7 +295,7 @@ body{
   border: 1px solid rgba(255,255,255,.14);
   background: rgba(255,255,255,.08);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 850;
   color: rgba(243,246,255,.92);
 }
 .badge-pill--outline{ background: transparent; border-color: rgba(245,166,35,.35); }
@@ -261,6 +305,7 @@ body{
   background: linear-gradient(135deg, var(--magenta), var(--orange));
   box-shadow: 0 0 0 4px rgba(245,166,35,.12);
 }
+#statusPill{ border-color: rgba(243,246,255,.22); }
 
 /* Social */
 .social-icons{
@@ -282,22 +327,42 @@ body{
   transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
 }
 .social-icons a:hover{ transform: translateY(-2px); background: rgba(255,255,255,.12); box-shadow: var(--shadow2); }
-.social-icons a:focus-visible{ outline: none; box-shadow: var(--shadow2), var(--ring); }
+.social-icons a:focus-visible{ box-shadow: var(--shadow2), var(--ring); }
 
 /* Section */
 .section-head{ margin: 14px 2px 10px; text-align: left; position: relative; z-index: 2; }
+.section-head-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
 .section-title{
   font-size: 13px;
   font-weight: 900;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: rgba(243,246,255,.92);
+  opacity: .85;
+}
+.section-chip{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 850;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(243,246,255,.86);
 }
 .section-subtitle{ margin-top: 6px; font-size: 12.5px; font-weight: 650; color: var(--muted); }
 
 /* Links */
 .links{ display:flex; flex-direction:column; gap: 12px; margin-top: 10px; position: relative; z-index: 2; }
 
+/* main button */
 .animated-link{
   width: 100%;
   display:flex;
@@ -320,6 +385,8 @@ body{
   transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
   box-shadow: 0 10px 26px rgba(0,0,0,.16);
 }
+
+/* soft highlight */
 .animated-link::before{
   content:"";
   position:absolute;
@@ -330,9 +397,28 @@ body{
   opacity: .9;
   pointer-events:none;
 }
-.animated-link:hover{ transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,.22); filter: brightness(1.02); }
-.animated-link:focus-visible{ outline: none; box-shadow: 0 14px 36px rgba(0,0,0,.22), var(--ring); }
 
+/* shine sweep on hover */
+.animated-link::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,.18) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform .65s ease;
+  pointer-events:none;
+  opacity: .9;
+}
+.animated-link:hover::after{ transform: translateX(120%); }
+
+.animated-link:hover{ transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,.22); filter: brightness(1.02); }
+.animated-link:focus-visible{ box-shadow: 0 14px 36px rgba(0,0,0,.22), var(--ring); }
+
+/* icon micro */
+.animated-link i{ transition: transform .2s ease; }
+.animated-link:hover i{ transform: scale(1.12); }
+
+/* Left text block */
 .link-left{ display:flex; flex-direction:column; gap: 4px; min-width: 0; }
 .link-title{
   display:flex;
@@ -343,6 +429,7 @@ body{
   overflow:hidden;
   text-overflow:ellipsis;
 }
+.link-title span{ font-weight: 880; }
 .link-desc{
   font-size: 12.5px;
   font-weight: 650;
@@ -382,10 +469,11 @@ body{
   100%{ transform: translateX(0); }
 }
 
+/* Coming soon (still clickable for popup) */
 .animated-link.disabled{
   background: linear-gradient(90deg, rgba(177,43,102,.55), rgba(245,166,35,.55));
   opacity: .86;
-  cursor: pointer; /* still clickable for popup */
+  cursor: pointer;
   box-shadow: none;
 }
 .animated-link.disabled:hover{ transform: translateY(-1px); filter: none; box-shadow: none; }
@@ -440,6 +528,12 @@ body{
   box-shadow: var(--shadow);
   padding: 16px;
   backdrop-filter: blur(12px);
+  transform: translateY(8px) scale(.98);
+  opacity: 0;
+  animation: modalIn .18s ease forwards;
+}
+@keyframes modalIn{
+  to{ transform: translateY(0) scale(1); opacity: 1; }
 }
 .modal-top{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
 .modal-top h3{ font-size: 16px; font-weight: 900; }
@@ -465,6 +559,8 @@ body{
   line-height: 1.45;
   font-size: 13px;
 }
+
+.modal-actions{ display:flex; gap: 10px; }
 
 .modal-ok{
   width: 100%;
@@ -514,8 +610,9 @@ body{
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
-  .avatar-bg, .phone-frame::after, .orb-ring, body{ animation: none !important; }
+  body, .bg-orb, .bg-sparkles, .avatar-bg, .orb-ring{ animation: none !important; }
   .reveal, .reveal.is-in{ transition: none !important; }
+  .animated-link::after{ transition: none !important; }
   .animated-link:hover .dot{ animation: none !important; }
 }
 
