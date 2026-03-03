@@ -1,16 +1,17 @@
 // ============================
-// LINKS sesuai permintaan
+// LINKS (final)
 // ============================
 const LINKS = [
   {
-    key: "stock",
-    title: "Stock Keperluan Sekolah",
-    desc: "Manajemen stok kebutuhan sekolah",
-    icon: "fa-solid fa-box-archive",
-    type: "modal",
-    modalTitle: "Stock Keperluan Sekolah",
-    modalDesc: "Fitur Stock Keperluan Sekolah masih Coming Soon. Sistem sedang disiapkan.",
-    badge: "Coming Soon",
+    key: "absensi",
+    title: "Absensi Surya Inspirasi Schools",
+    desc: "Sistem absensi online siswa & guru",
+    icon: "fa-solid fa-user-check",
+    type: "link",
+    url: "https://sis-absensi.my.id",
+    badge: "Utama",
+    primary: true,
+    hero: true,
   },
   {
     key: "ipad",
@@ -20,6 +21,16 @@ const LINKS = [
     type: "link",
     url: "https://sis-ipadloan.my.id",
     badge: "Buka",
+  },
+  {
+    key: "stock",
+    title: "Stock Keperluan Sekolah",
+    desc: "Manajemen stok kebutuhan sekolah",
+    icon: "fa-solid fa-box-archive",
+    type: "modal",
+    modalTitle: "Stock Keperluan Sekolah",
+    modalDesc: "Fitur Stock Keperluan Sekolah masih Coming Soon. Sistem sedang disiapkan.",
+    badge: "Coming Soon",
   },
   {
     key: "buku",
@@ -55,6 +66,9 @@ const copyBtn = document.getElementById("copyLinkBtn");
 // year
 const yearEl = document.getElementById("year");
 
+// status pill (optional)
+const statusPill = document.getElementById("statusPill");
+
 // ============================
 // Helpers
 // ============================
@@ -87,12 +101,20 @@ function renderLinks() {
   if (!linksWrap) return;
   linksWrap.innerHTML = "";
 
-  LINKS.forEach((item) => {
+  LINKS.forEach((item, idx) => {
     const isModal = item.type === "modal";
     const el = document.createElement(isModal ? "button" : "a");
 
-    el.className = "animated-link" + (isModal ? " disabled" : "");
-    el.type = isModal ? "button" : undefined;
+    el.className =
+      "animated-link" +
+      (isModal ? " disabled" : "") +
+      (item.primary ? " primary" : "") +
+      (item.hero ? " hero" : "");
+
+    if (isModal) el.type = "button";
+
+    // optional: animation delay per item
+    el.style.animationDelay = `${0.06 * idx}s`;
 
     // left
     const left = document.createElement("div");
@@ -142,6 +164,14 @@ function renderLinks() {
 }
 
 // ============================
+// Status pill (opsional - sekadar indikator)
+// ============================
+function setStatusOnline() {
+  if (!statusPill) return;
+  statusPill.innerHTML = `<i class="fa-solid fa-signal"></i> Online`;
+}
+
+// ============================
 // Init
 // ============================
 document.addEventListener("DOMContentLoaded", () => {
@@ -152,6 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".reveal").forEach((el) => {
     requestAnimationFrame(() => el.classList.add("is-in"));
   });
+
+  // status
+  setStatusOnline();
 
   // render
   renderLinks();
