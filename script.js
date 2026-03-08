@@ -14,6 +14,15 @@ const LINKS = [
     hero: true,
   },
   {
+    key: "academia",
+    title: "Academia",
+    desc: "Sistem akademik sekolah untuk penilaian dan administrasi",
+    icon: "fa-solid fa-graduation-cap",
+    type: "link",
+    url: "https://inspirasischools.academiaerp.com/#",
+    badge: "Buka",
+  },
+  {
     key: "ipad",
     title: "Form Peminjaman iPad",
     desc: "Ajukan peminjaman iPad secara online",
