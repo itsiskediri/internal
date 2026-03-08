@@ -27,10 +27,9 @@ const LINKS = [
     title: "Stock Keperluan Sekolah",
     desc: "Manajemen stok kebutuhan sekolah",
     icon: "fa-solid fa-box-archive",
-    type: "modal",
-    modalTitle: "Stock Keperluan Sekolah",
-    modalDesc: "Fitur Stock Keperluan Sekolah masih Coming Soon. Sistem sedang disiapkan.",
-    badge: "Coming Soon",
+    type: "link",
+    url: "https://sis-asset.my.id/ga_stock_public.php",
+    badge: "Buka",
   },
   {
     key: "buku",
