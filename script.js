@@ -45,10 +45,9 @@ const LINKS = [
     title: "Manajemen Buku Sekolah",
     desc: "Pengelolaan & katalog buku sekolah",
     icon: "fa-solid fa-book",
-    type: "modal",
-    modalTitle: "Manajemen Buku Sekolah",
-    modalDesc: "Fitur Manajemen Buku Sekolah masih Coming Soon. Sistem sedang disiapkan.",
-    badge: "Coming Soon",
+    type: "link",
+    url: "https://sis-buku.my.id/katalog",
+    badge: "Buka",
   },
 ];
 
